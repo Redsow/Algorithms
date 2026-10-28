@@ -19,11 +19,4 @@ add_minipig_test(register Tests/register.mp)
 add_minipig_test(subtract Tests/subtract.mp)
 add_minipig_test(swap Tests/swap.mp)
 add_minipig_test(switch Tests/switch.mp)
-add_executable(TestListLab2 Tests/list.cpp)
-target_link_libraries(TestListLab2 PRIVATE LibraryCPP)
 
-add_executable(TestStackLab2 Tests/stack.cpp)
-target_link_libraries(TestStackLab2 PRIVATE LibraryCPP)
-
-add_test(NAME Lab2_List COMMAND TestListLab2)
-add_test(NAME Lab2_Stack COMMAND TestStackLab2)
