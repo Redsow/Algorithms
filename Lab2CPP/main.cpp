@@ -2,8 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
-
-#include "../LibraryCPP/stack.h"
+#include "stack.h"
 
 using namespace std;
 
@@ -20,28 +19,17 @@ int get_number(Stack *stack)
     return number;
 }
 
-void reverse_stack(Stack *stack)
+void reverse_stack(Stack *&stack)
 {
-    Stack *temp1 = stack_create();
-    Stack *temp2 = stack_create();
+    Stack *temp = stack_create();
 
     while (!stack_empty(stack))
     {
-        stack_push(temp1, get_number(stack));
+        stack_push(temp, get_number(stack));
     }
 
-    while (!stack_empty(temp1))
-    {
-        stack_push(temp2, get_number(temp1));
-    }
-
-    while (!stack_empty(temp2))
-    {
-        stack_push(stack, get_number(temp2));
-    }
-
-    stack_delete(temp1);
-    stack_delete(temp2);
+    stack_delete(stack);
+    stack = temp;
 }
 
 void print_stack(Stack *stack)
@@ -160,7 +148,16 @@ int main(int argc, char *argv[])
         // Переворот стека
         else if (command == '%' || command == 'r')
         {
-            reverse_stack(current);
+            if (current == stack1)
+            {
+                reverse_stack(stack1);
+                current = stack1;
+            }
+            else
+            {
+                reverse_stack(stack2);
+                current = stack2;
+            }
         }
 
         // Чтение числа
