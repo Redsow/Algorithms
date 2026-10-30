@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "stack.h"
+#include <algorithm>
 
 using namespace std;
 
@@ -201,41 +202,21 @@ int main(int argc, char *argv[])
         {
             int n = get_number(current);
 
+            int pos = upper_bound(marks.begin(), marks.end(), i) - marks.begin();
+
             if (n > 0)
             {
-                int count = 0;
+                int target = pos + n - 1;
 
-                for (int j = 0; j < (int)marks.size(); j++)
-                {
-                    if (marks[j] > i)
-                    {
-                        count++;
-
-                        if (count == n)
-                        {
-                            i = marks[j];
-                            break;
-                        }
-                    }
-                }
+                if (target < (int)marks.size())
+                    i = marks[target];
             }
             else if (n < 0)
             {
-                int count = 0;
+                int target = pos + n;
 
-                for (int j = (int)marks.size() - 1; j >= 0; j--)
-                {
-                    if (marks[j] < i)
-                    {
-                        count++;
-
-                        if (count == -n)
-                        {
-                            i = marks[j];
-                            break;
-                        }
-                    }
-                }
+                if (target >= 0)
+                    i = marks[target];
             }
         }
     }
